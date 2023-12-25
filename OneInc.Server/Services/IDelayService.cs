@@ -2,6 +2,8 @@
 {
     public interface IDelayService
     {
-        Task Delay(int minimum, int maximum);
+        Task Delay(int minimum, int maximum, CancellationToken token);
+
+        Task Delay(CancellationToken token);
     }
 }

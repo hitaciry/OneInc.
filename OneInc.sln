@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneInc.Server", "OneInc.Ser
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "oneinc.client", "oneinc.client\oneinc.client.esproj", "{9DB79C13-A35D-4A22-895B-16ADC4955DB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneInc.ServerTests", "OneInc.ServerTests\OneInc.ServerTests.csproj", "{744FFE56-41E3-49F6-BB2F-68364ED8E88F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{9DB79C13-A35D-4A22-895B-16ADC4955DB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DB79C13-A35D-4A22-895B-16ADC4955DB2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9DB79C13-A35D-4A22-895B-16ADC4955DB2}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{744FFE56-41E3-49F6-BB2F-68364ED8E88F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{744FFE56-41E3-49F6-BB2F-68364ED8E88F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{744FFE56-41E3-49F6-BB2F-68364ED8E88F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{744FFE56-41E3-49F6-BB2F-68364ED8E88F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
