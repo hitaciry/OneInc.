@@ -2,6 +2,6 @@
 {
     public interface IStringConvertService<T> where T : class
     {
-        Task<T> Convert(T value);
+        T Convert(T value);
     }
 }
