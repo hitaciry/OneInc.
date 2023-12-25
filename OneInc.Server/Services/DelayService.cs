@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.Extensions.Options;
 using OneInc.Server.Model;
 
 namespace OneInc.Server.Services
@@ -7,22 +8,9 @@ namespace OneInc.Server.Services
     {
         private readonly DelayRange delayRange;
 
-        public DelayService(DelayRange delayRange)
+        public DelayService(IOptions<DelayRange> options)
         {
-            this.delayRange = delayRange;
-        }
-
-        /// <summary>
-        /// Delay Task for a random amount of seconds within a specified range.
-        /// </summary>
-        /// <param name="minimum">Lowest value in seconds, inluded to the range</param>
-        /// <param name="maximum">Highest value in seconds, excluded from the range. The actual result may exceed the maximum value due to additional calculations.</param>
-        /// <returns></returns>
-        public async Task Delay(int minimum, int maximum, CancellationToken token)
-        {
-            Random rnd = new();
-            int timeToWait = rnd.Next(minimum * 1000, maximum * 1000); 
-            await Task.Delay(timeToWait, token); 
+            this.delayRange = options.Value;
         }
 
         /// <summary>
