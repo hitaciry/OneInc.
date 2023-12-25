@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.Extensions.Options;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OneInc.Server.Model;
 using OneInc.Server.Services;
@@ -21,7 +22,8 @@ namespace OneInc.Server.Services.Tests
         public async Task DelayTest_DelayIsWithBorder_WithinRange(int min, int max)
         {
             //arrange
-            var servive = new DelayService(new DelayRange(min,max));
+            var options = Options.Create(new DelayRange (min, max));
+            var servive = new DelayService(options);
             var token = new CancellationToken();
             Stopwatch stopwatch = Stopwatch.StartNew();
 
@@ -42,7 +44,8 @@ namespace OneInc.Server.Services.Tests
         public async Task DelayTest_DelayForEqualBorders_EqualToBorder(int min, int max)
         {
             //arrange
-            var servive = new DelayService(new DelayRange(min, max));
+            var options = Options.Create(new DelayRange(min, max));
+            var servive = new DelayService(options);
             var token = new CancellationToken();
             Stopwatch stopwatch = Stopwatch.StartNew();
 
@@ -60,7 +63,8 @@ namespace OneInc.Server.Services.Tests
         public void DelayTest_InvalidInput(int min, int max)
         {
             //arrange
-            var servive = new DelayService(new DelayRange(min, max));
+            var options = Options.Create(new DelayRange(min, max));
+            var servive = new DelayService(options);
             var token = new CancellationToken();
 
             //assert
