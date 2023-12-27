@@ -3,6 +3,7 @@ using OneInc.Server.Model;
 using OneInc.Server.Services;
 
 
+var LoclahostDevelopment = "LoclahostDevelopment";
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<DelayRange>(builder.Configuration.GetSection(nameof(DelayRange)));
@@ -12,7 +13,7 @@ builder.Services.AddTransient<IDelayService, DelayService>();
 builder.Services.AddTransient<IStringConvertService<string>, StringConvertToBase64Service>();
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(
+    options.AddPolicy(LoclahostDevelopment,
         policy =>
         {
             //TODO: set origin from configuration
@@ -33,12 +34,15 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 
 }
+else
+{
+    app.UseCors(LoclahostDevelopment);
+}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseCors();
 app.MapHub<StringConverterHub>("/hub");
 
 app.Run();
