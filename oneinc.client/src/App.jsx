@@ -1,25 +1,13 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import EncoderForm from './components/EncoderForm';
+import withSignalRConnection from './services/withSignalRConnection';
+import withBase64Encoder from './services/withBase64Encoder';
 
-function App() {
-
-    useEffect(() => {
-        populateWeatherData();
-    }, []);
-
-    return (
-        <div>
-            <h1 id="tabelLabel">Weather forecast</h1>
-            <p>This component demonstrates fetching data from the server.</p>
-            {contents}
-        </div>
-    );
-    
-    async function populateWeatherData() {
-        const response = await fetch('weatherforecast');
-        const data = await response.json();
-        setForecasts(data);
-    }
-}
+const App = withSignalRConnection(
+  withBase64Encoder(EncoderForm),
+  'https://localhost:44337/hub'
+);
 
 export default App;
