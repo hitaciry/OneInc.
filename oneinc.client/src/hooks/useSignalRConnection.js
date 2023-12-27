@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as signalR from '@microsoft/signalr';
 
-const withSignalRConnection = (WrappedComponent, hubUrl) => (props) => {
+export const useSignalRConnection = (hubUrl) => {
   const [connection, setConnection] = useState(null);
   const [connected, setConnected] = useState(false);
   useEffect(() => {
@@ -32,14 +32,5 @@ const withSignalRConnection = (WrappedComponent, hubUrl) => (props) => {
     }
   };
 
-  return (
-    <WrappedComponent
-      connection={connection}
-      isConnected={connected}
-      connect={connect}
-      {...props}
-    />
-  );
+  return [connection, connected, connect];
 };
-
-export default withSignalRConnection;

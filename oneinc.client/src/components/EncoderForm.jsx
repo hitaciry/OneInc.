@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { Button, Card, Form, Spinner, Stack } from 'react-bootstrap';
-import './EncoderView.css';
+import './EncoderForm.css';
 import { SignalrReconnect } from './SignalrReconnect';
+import { useSignalRConnection } from '../hooks/useSignalRConnection';
+import { useBase64Encoder } from '../hooks/useBase64Encoder';
 
-const EncoderForm = ({
-  encodeString,
-  cancelEncoding,
-  encodedString,
-  isEncoding,
-  isConnected,
-  connect
-}) => {
+const EncoderForm = () => {
+  const apiUrl =
+    /*process?.env?.REACT_APP_BACKEND_URL ||*/ 'https://localhost:44337';
+  const [connection, isConnected, connect] = useSignalRConnection(
+    `${apiUrl}/hub`
+  );
+  const [encodeString, cancelEncoding, encodedString, isEncoding] =
+    useBase64Encoder(connection, isConnected);
+
   const [inputString, setInputString] = useState('');
 
   const handleInputChange = (event) => {
@@ -24,7 +27,7 @@ const EncoderForm = ({
   return (
     <Card className='min-vw-50'>
       <Card.Body>
-        <SignalrReconnect isConnected={isConnected} connect={connect} >
+        <SignalrReconnect isConnected={isConnected} connect={connect}>
           <Form>
             <Form.Group className='mb-3' controlId='form.inputString'>
               <Form.Label>Input string</Form.Label>
