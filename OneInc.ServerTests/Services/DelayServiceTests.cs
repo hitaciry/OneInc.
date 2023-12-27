@@ -36,6 +36,27 @@ namespace OneInc.Server.Services.Tests
         }
 
         [TestMethod()]
+        [DataRow(1, 5)]
+        public async Task DelayTest_DelayIsWithBorder_DelayDifferentForSameRanges(int min, int max)
+        {
+            //arrange
+            var options = Options.Create(new DelayRange(min, max));
+            var servive = new DelayService(options);
+            var token = new CancellationToken();
+            var executionTime = new int[10];
+            //act
+            for (int i = 0; i < executionTime.Length; i++)
+            {                
+                Stopwatch stopwatch = Stopwatch.StartNew();
+                await servive.Delay(token);
+                stopwatch.Stop();
+                executionTime[i]= stopwatch.Elapsed.Seconds;
+            }
+            //assert
+            Assert.IsTrue(executionTime.Distinct().Count()>1);
+        }
+
+        [TestMethod()]
         [DataRow(0, 0)]
         [DataRow(1, 1)]
         [DataRow(2, 2)]

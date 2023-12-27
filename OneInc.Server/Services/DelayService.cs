@@ -7,10 +7,12 @@ namespace OneInc.Server.Services
     public class DelayService : IDelayService
     {
         private readonly DelayRange delayRange;
+        private readonly Random rnd;
 
         public DelayService(IOptions<DelayRange> options)
         {
             this.delayRange = options.Value;
+            rnd = new();
         }
 
         /// <summary>
@@ -31,8 +33,7 @@ namespace OneInc.Server.Services
         /// <param name="maximum">Highest value in seconds, excluded from the range. The actual result may exceed the maximum value due to additional calculations.</param>
         /// <returns></returns>
         public async Task Delay(int minimum, int maximum, CancellationToken token)
-        {
-            Random rnd = new();
+        {            
             int timeToWait = rnd.Next(minimum * 1000, maximum * 1000);
             await Task.Delay(timeToWait, token);
         }
